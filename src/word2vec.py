@@ -28,4 +28,14 @@ def vectorizer(
             document in the corpus.
     """
     # TODO
-    raise NotImplementedError
+    corpus_vectors = np.zeros((len(corpus), num_features))
+    
+    for i, document in enumerate(corpus):
+    	for word in document:
+    	    if word in model.wv.key_to_index:
+    	    	corpus_vectors[i] += model.wv.get_vector(word)
+    	corpus_vectors[i] /= len(document)
+    	
+    
+    return corpus_vectors
+    
